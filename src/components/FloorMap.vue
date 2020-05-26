@@ -48,7 +48,7 @@ export default {
         height: bheight / this.defaults.y - this.defaults.gap + "px",
         marginBottom: "1px",
         marginRight: "1px",
-        //backgroundcolor: "#d3f6db",
+        ///backgroundcolor: "#d3f6db",
         //backgroundImage: "url(http://1.bp.blogspot.com/-8PfnHfgrH4I/TylX2v8pTMI/AAAAAAAAJJ4/TICBoSEI57o/s1600/search_by_image_image.png)"
       };
 
