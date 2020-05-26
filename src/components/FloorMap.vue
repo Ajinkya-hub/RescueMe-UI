@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <div class="container">
       <div class="box">
         <img ref="drawTable" class="center-fit" src="../assets/FloorPlan.jpg" />
@@ -26,11 +26,9 @@
         ></div>
       </div>
     </div>
-    <img
-      src="@/assets/map_logo.jpg"
-      alt
-      style="height: 320px;position: absolute;margin-top: 100px;"
-    />
+    <div class="map-div">
+      <img src="@/assets/map_logo.jpg" alt class="map-img" />
+    </div>
   </div>
 </template>
 
@@ -78,7 +76,7 @@ export default {
       },
       n_Tiles: 0,
       division: [],
-      words: ""
+      words: "",
     };
   },
   methods: {
@@ -87,15 +85,18 @@ export default {
     positionImage: function() {},
 
     async get3WordsData() {
-        let request = {
-            coordinates: '19.576436,74.209311',
-            key: 'E9E98Q1L'
-        }
-        const response = await what3words.get3Words(request);
-        if(response != null){
-            this.words = response.data.words;
-            console.log("Response Words --------------------------> ", response.data.words);
-        }
+      let request = {
+        coordinates: "19.576436,74.209311",
+        key: "E9E98Q1L",
+      };
+      const response = await what3words.get3Words(request);
+      if (response != null) {
+        this.words = response.data.words;
+        console.log(
+          "Response Words --------------------------> ",
+          response.data.words
+        );
+      }
     },
   },
 };
@@ -167,5 +168,20 @@ export default {
   width: 100%;
   height: 100%;
   /*margin: 40px;*/ /* for demo purpose  */
+}
+
+.main {
+  text-align: center;
+  padding-top: 20px;
+}
+
+.map-div {
+  display: inline-flex;
+  position: absolute;
+}
+
+.map-img {
+  height: 200px;
+  margin-top: 0;
 }
 </style>
