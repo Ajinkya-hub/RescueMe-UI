@@ -1,17 +1,18 @@
-<template >
-
+<template>
   <v-footer class="footer" style="display:flex">
     <div class="footerOne">
-      <ul class="myList">
-        <li>&nbsp;</li>
-        <li>
+       <ul class="myList">
+          <li>&nbsp;</li>
+          <li>
           <span style="vertical-align: super">Rescue on the floor</span> &nbsp;
           <span>
             <img src="@/assets/tick.png" alt="tick" height="25px" />
           </span>
         </li>
         <li>
-          <span style="vertical-align: super">Rescue in hazardous situation</span>&nbsp;
+          <span style="vertical-align: super"
+            >Rescue in hazardous situation</span
+          >&nbsp;
           <span>
             <img src="@/assets/tick.png" alt="tick" height="25px" />
           </span>
@@ -22,15 +23,20 @@
             <img src="@/assets/tick.png" alt="tick" height="25px" />
           </span>
         </li>
-      </ul>
+       </ul>
     </div>
-    <v-divider vertical></v-divider>
-    <div class="footerTwo">
+  <v-divider vertical></v-divider>
+  <div class="footerTwo">
       <ul class="myList">
         <li>&nbsp;</li>
         <li>
           <span>
-            <img src="@/assets/Cog.png" alt="tick" height="32px" style="padding-right:5px" />
+            <img
+              src="@/assets/Cog.png"
+              alt="tick"
+              height="32px"
+              style="padding-right:5px"
+            />
           </span>
           <span style="vertical-align: super">Easy Intergration</span>
         </li>
@@ -53,7 +59,10 @@
           <span style="vertical-align: super">Some Other Features</span>
         </li>
         <li style="font-size: small;">
-           <p>Find exact location of employee on the floor in any hazardous situation</p>
+          <p>
+            Find exact location of employee on the floor in any hazardous
+            situation
+          </p>
           <p>
             Make sure employee safety status just by single SMS.
           </p>
@@ -67,13 +76,13 @@
 </template>
 <script>
 export default {
-  name: "FooterMenu"
+  name: "FooterMenu",
 };
 </script>
 <style scoped>
 .footer {
   width: 100%;
-  background-color: black !important;
+  background-color: #17a2b8 !important;
   color: white !important;
 }
 
@@ -81,8 +90,7 @@ export default {
   width: 23%;
   text-align: end;
   font-size: smaller;
-      padding-bottom: 22px;
-
+  padding-bottom: 22px;
 }
 
 .footerTwo {
@@ -99,9 +107,23 @@ ul.myList {
   list-style-type: none;
 }
 .theme--light.v-divider {
-  border: 2px solid red;
+  border: 2px solid white;
   height: 180px;
   margin-top: 15px;
   margin-left: 15px;
+}
+
+.bd-footer {
+  padding: 4rem 0;
+  text-align: center;
+  background-color: #eee;
+}
+
+.fluid-container.footer{
+  background: #17a2b8;
+}
+.fluid-container.footer > *:last-child {
+    margin-bottom: 0px;
+    color: #fff;
 }
 </style>

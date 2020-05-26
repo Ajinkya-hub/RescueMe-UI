@@ -9,8 +9,13 @@ const router = new Router({
   routes: [
     {
       path: "/home",
-      name: "PostCodeSearch",
+      name: "MainPage",
       component: () => import("./components/MainPage.vue")
+    },
+    {
+      path: "/documentation",
+      name: "documentation",
+      component: () => import("./components/documentation.vue")
     },
     {
       path: "/404",
