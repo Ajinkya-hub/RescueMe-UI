@@ -2,42 +2,49 @@
   <div class="main">
     <div class="container">
         <div class="box">
-            <div id="app" style="height: 100%">
-                <v-map :zoom="zoom" :center="center">
-                    <v-tilelayer :url="url" :attribution="attribution"></v-tilelayer>
-                    <v-marker :lat-lng="marker"></v-marker>
-                </v-map>
+            <div>
+                <l-map :zoom="zoom" :center="center" style="height:500px;">
+                <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+                <l-marker :lat-lng="marker"></l-marker>
+                </l-map>
             </div>
-        </div>      
-        <div class="map-div">
-            <img src="@/assets/map_logo.jpg" alt class="map-img" />
         </div>
+    </div>          
+    <div class="map-div">
+        <img src="@/assets/map_logo.jpg" alt class="map-img" />
     </div>
    </div>
 </template>
 
 
 <script>
-import Vue2Leaflet from 'vue2-leaflet';
-import L from "leaflet/dist/leaflet";
+
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
+import L from 'leaflet';
+import "leaflet/dist/leaflet.css"
 
 export default {
-    name: "NeedHelp",
-    data: function() {
-      return {
-        zoom: 16,
-        center: [30.2792953, 120.1198430],
-        url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-        marker: L.latLng(30.2792953, 120.1198430)
-      }
-    },
-    components: {
-      'v-map': Vue2Leaflet.Map,
-      'v-tilelayer': Vue2Leaflet.TileLayer,
-      'v-marker': Vue2Leaflet.Marker
+  name: 'example',
+  components: {
+    LMap,
+    LTileLayer,
+    LMarker
+  },
+  data () {
+    return {
+      zoom:17,
+      center: L.latLng(18.564740, 73.881300),
+      url:'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
+      attribution:'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      marker: L.latLng(18.564740, 73.881300),
+    }
+  },
+  methods: {
+    mounted() {
+       // setTimeout(function() { window.dispatchEvent(new Event('resize')) }, 250);
     }
   }
+}
 
 </script>
 
