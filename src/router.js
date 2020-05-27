@@ -13,9 +13,9 @@ const router = new Router({
       component: () => import("./components/MainPage.vue")
     },
     {
-      path: "/documentation",
-      name: "documentation",
-      component: () => import("./components/documentation.vue")
+      path: "/NeedHelp",
+      name: "NeedHelp",
+      component: () => import("./components/NeedHelp.vue")
     },
     {
       path: "/404",
