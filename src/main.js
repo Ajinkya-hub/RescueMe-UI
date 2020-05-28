@@ -1,14 +1,27 @@
-import Vue from 'vue'
-import App from './App.vue'
-import vuetify from './plugins/vuetify'
-import router from './router';
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+/*!
+
+ =========================================================
+ * Vue Paper Dashboard - v2.0.0
+ =========================================================
+
+ * Product Page: http://www.creative-tim.com/product/paper-dashboard
+ * Copyright 2019 Creative Tim (http://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE.md)
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
+import Vue from "vue";
+import App from "./App";
+import router from "./router/index";
+
+import PaperDashboard from "./plugins/paperDashboard";
+import "vue-notifyjs/themes/default.css";
 
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-
 delete L.Icon.Default.prototype._getIconUrl
 
 L.Icon.Default.mergeOptions({
@@ -17,14 +30,10 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 })
 
-Vue.config.productionTip = false
-// Install BootstrapVue
-Vue.use(BootstrapVue)
-// Optionally install the BootstrapVue icon components plugin
-Vue.use(IconsPlugin)
+Vue.use(PaperDashboard);
 
-new Vue({  
-  vuetify,
+/* eslint-disable no-new */
+new Vue({
   router,
-  render: h => h(App),
-}).$mount('#app')
+  render: h => h(App)
+}).$mount("#app");
