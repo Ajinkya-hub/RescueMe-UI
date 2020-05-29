@@ -67,7 +67,7 @@
 import what3words from "../../middleware/what3words.js";
 export default {
    mounted() {
-    this.get3WordsData();
+    // this.get3WordsData();
     var bwidth = 972;
     var bheight = 600;
     this.n_Tiles = this.defaults.x * this.defaults.y;

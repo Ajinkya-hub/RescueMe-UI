@@ -26,6 +26,7 @@
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 import L from 'leaflet';
 import "leaflet/dist/leaflet.css"
+import service from '@/middleware/service'
 
 export default {
   components: {
@@ -42,78 +43,23 @@ export default {
       marker: L.latLng(18.564740, 73.881300),
     }
   },
-  // mounted() {
-  //   var myLatlng = new window.google.maps.LatLng(40.748817, -73.985428);
-  //   var mapOptions = {
-  //     zoom: 13,
-  //     center: myLatlng,
-  //     scrollwheel: false, // we disable de scroll over the map, it is a really annoing when you scroll through page
-  //     styles: [
-  //       {
-  //         featureType: "water",
-  //         stylers: [{ saturation: 43 }, { lightness: -11 }, { hue: "#0088ff" }]
-  //       },
-  //       {
-  //         featureType: "road",
-  //         elementType: "geometry.fill",
-  //         stylers: [{ hue: "#ff0000" }, { saturation: -100 }, { lightness: 99 }]
-  //       },
-  //       {
-  //         featureType: "road",
-  //         elementType: "geometry.stroke",
-  //         stylers: [{ color: "#808080" }, { lightness: 54 }]
-  //       },
-  //       {
-  //         featureType: "landscape.man_made",
-  //         elementType: "geometry.fill",
-  //         stylers: [{ color: "#ece2d9" }]
-  //       },
-  //       {
-  //         featureType: "poi.park",
-  //         elementType: "geometry.fill",
-  //         stylers: [{ color: "#ccdca1" }]
-  //       },
-  //       {
-  //         featureType: "road",
-  //         elementType: "labels.text.fill",
-  //         stylers: [{ color: "#767676" }]
-  //       },
-  //       {
-  //         featureType: "road",
-  //         elementType: "labels.text.stroke",
-  //         stylers: [{ color: "#ffffff" }]
-  //       },
-  //       { featureType: "poi", stylers: [{ visibility: "off" }] },
-  //       {
-  //         featureType: "landscape.natural",
-  //         elementType: "geometry.fill",
-  //         stylers: [{ visibility: "on" }, { color: "#b8cb93" }]
-  //       },
-  //       { featureType: "poi.park", stylers: [{ visibility: "on" }] },
-  //       {
-  //         featureType: "poi.sports_complex",
-  //         stylers: [{ visibility: "on" }]
-  //       },
-  //       { featureType: "poi.medical", stylers: [{ visibility: "on" }] },
-  //       {
-  //         featureType: "poi.business",
-  //         stylers: [{ visibility: "simplified" }]
-  //       }
-  //     ]
-  //   };
-  //   var map = new window.google.maps.Map(
-  //     document.getElementById("map"),
-  //     mapOptions
-  //   );
 
-  //   var marker = new window.google.maps.Marker({
-  //     position: myLatlng,
-  //     title: "Hello World!"
-  //   });
+  mounted(){
+    this.getUnsafeEmployee();
+  },
 
-  //   // To add the marker to the map, call setMap();
-  //   marker.setMap(map);
-  // }
+  methods: {
+    async getUnsafeEmployee(){
+      const response = await service.getEndpoint(
+        `api/Message/GetUnsafeEmployee?requestFor=1`
+        );
+        const responseData = response.data[0].addressCoordinates;
+        
+        this.marker = L.latLng(responseData.latitude, responseData.longitude);
+        this.center = L.latLng(responseData.latitude, responseData.longitude);
+    }
+  }
+  
 };
 </script>
 <style scoped>
