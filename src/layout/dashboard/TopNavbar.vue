@@ -20,14 +20,14 @@
             </a>
           </li>
           <drop-down class="nav-item"
-                     title="5 Notifications"
+                     :title="notificationList.length + ' Notification'"
                      title-classes="nav-link"
                      icon="ti-bell">
-            <a class="dropdown-item" href="#">Notification 1</a>
-            <a class="dropdown-item" href="#">Notification 2</a>
+                     <a v-for="item in notificationList" :key="item.message" class="dropdown-item">{{item.message}}</a>
+            <!-- <a class="dropdown-item" href="#">Notification 2</a>
             <a class="dropdown-item" href="#">Notification 3</a>
             <a class="dropdown-item" href="#">Notification 4</a>
-            <a class="dropdown-item" href="#">Another notification</a>
+            <a class="dropdown-item" href="#">Another notification</a> -->
           </drop-down>
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -42,6 +42,7 @@
     </div></nav>
 </template>
 <script>
+import service from '@/middleware/service'
 export default {
   computed: {
     routeName() {
@@ -49,9 +50,13 @@ export default {
       return this.capitalizeFirstLetter(name);
     }
   },
+  mounted(){
+    this.getNotifications();
+  },
   data() {
     return {
-      activeNotifications: false
+      activeNotifications: false,
+      notificationList : [],
     };
   },
   methods: {
@@ -69,6 +74,25 @@ export default {
     },
     hideSidebar() {
       this.$sidebar.displaySidebar(false);
+    },
+        async getNotifications(){
+      const response = await service.getEndpoint(
+        `api/Message/GetNotification`
+        );
+        const responseData = response.data;
+
+        console.log(responseData);
+
+        let counter = 0;
+      var setint = setInterval(() => {
+        this.notificationList.push(responseData[counter++]);
+
+        if(counter == responseData.length || counter == 10){
+          clearInterval(setint);
+        }
+        console.log(JSON.stringify(this.notificationList));
+}, 2000);
+
     }
   }
 };

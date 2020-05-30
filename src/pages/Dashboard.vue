@@ -20,24 +20,7 @@
     </div> -->
 
     <!--Charts-->
-    <!-- <div class="row"> -->
-
-      <!-- <div class="col-12">
-        <chart-card title="Users behavior"
-                    sub-title="24 Hours performance"
-                    :chart-data="usersChart.data"
-                    :chart-options="usersChart.options">
-          <span slot="footer">
-            <i class="ti-reload"></i> Updated 3 minutes ago
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Open
-            <i class="fa fa-circle text-danger"></i> Click
-            <i class="fa fa-circle text-warning"></i> Click Second Time
-          </div>
-        </chart-card>
-      </div> -->
-
+    <div class="row">
       <div class="col-md-6 col-12">
         <chart-card title="Response Statistics"
                     sub-title="Last campaign performance"
@@ -53,27 +36,43 @@
         </chart-card>
       </div>
 
-      <!-- <div class="col-md-6 col-12">
-        <chart-card title="2015 Sales"
-                    sub-title="All products including Taxes"
-                    :chart-data="activityChart.data"
-                    :chart-options="activityChart.options">
-          <span slot="footer">
-            <i class="ti-check"></i> Data information certified
-          </span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Tesla Model S
-            <i class="fa fa-circle text-warning"></i> BMW 5 Series
+      <div class="col-md-6 col-12">
+        <h5>Notification states</h5>
+          <div v-for="item in notificationList" class="alert alert-danger" :key="item.message">
+            <button type="button" aria-hidden="true" class="close">×</button>
+            <span>
+              <b> {{item.status}} </b> {{item.message}}</span>
           </div>
-        </chart-card>
-      </div> -->
+           <div class="alert alert-success">
+            <button type="button" aria-hidden="true" class="close">×</button>
+            <span>
+              <b> Success - </b> This is a regular notification made with ".alert-success"</span>
+          </div>
+          <!-- <div class="alert alert-success">
+            <button type="button" aria-hidden="true" class="close">×</button>
+            <span>
+              <b> Success - </b> This is a regular notification made with ".alert-success"</span>
+          </div>
+          <div class="alert alert-warning">
+            <button type="button" aria-hidden="true" class="close">×</button>
+            <span>
+              <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
+          </div>
+          <div class="alert alert-danger">
+            <button type="button" aria-hidden="true" class="close">×</button>
+            <span>
+              <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
+          </div> -->
+        </div>
+      </div>
 
-    <!-- </div> -->
+    </div>
 
   </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
+import service from '@/middleware/service';
 import Chartist from 'chartist';
 export default {
   components: {
@@ -187,8 +186,37 @@ export default {
           series: [62, 32, 6]
         },
         options: {}
-      }
+      },
+      notificationList : []
     };
+  },
+  mounted(){
+    this.getNotifications();
+  },
+  methods:{
+    async getNotifications(){
+      const response = await service.getEndpoint(
+        `api/Message/GetNotification`
+        );
+        const responseData = response.data;
+
+        console.log(responseData);
+
+        let counter = 0;
+      var setint = setInterval(() => {
+debugger;
+        var notData = responseData[counter++];
+        notData["class1"] = notData.status == "Unsafe" ? 'alert alert-danger' : 'alert alert-success';
+
+        this.notificationList.push(responseData[counter++]);
+
+        if(counter == responseData.length || counter == 10){
+          clearInterval(setint);
+        }
+        // console.log(JSON.stringify(this.notificationList));
+}, 2000);
+
+    }
   }
 };
 </script>
