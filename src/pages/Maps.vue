@@ -9,7 +9,7 @@
           <div class="author">
             <img
               class="avatar border-white"
-              src="@/assets/img/faces/aone.jpg"
+              src="@/assets/img/faces/face-1.jpg"
               alt="..."
             />
             <h4 class="title">

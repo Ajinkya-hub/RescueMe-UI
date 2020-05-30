@@ -87,7 +87,7 @@ export default {
       };
 
       if (i == 412 || i == 413 || i == 452 || i == 453) {
-        cssPorps.blinkClass = "blink_me_red";
+        cssPorps.blinkClass = "blink_me_orange";
       }
 
       if (i == 551) {
