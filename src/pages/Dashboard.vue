@@ -38,7 +38,7 @@
 
       <div class="col-md-6 col-12">
         <h5>Notification states</h5>
-          <div v-for="item in notificationList" class="alert alert-danger" :key="item.message">
+          <div v-for="item in notificationList" :class="item.status == 'Unsafe'?'alert alert-danger':'alert alert-success' " :key="item.message">
             <button type="button" aria-hidden="true" class="close">×</button>
             <span>
               <b> {{item.status}} </b> {{item.message}}</span>
@@ -204,10 +204,6 @@ export default {
 
         let counter = 0;
       var setint = setInterval(() => {
-debugger;
-        var notData = responseData[counter++];
-        notData["class1"] = notData.status == "Unsafe" ? 'alert alert-danger' : 'alert alert-success';
-
         this.notificationList.push(responseData[counter++]);
 
         if(counter == responseData.length || counter == 10){
