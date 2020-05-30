@@ -1,25 +1,4 @@
 <template>
-  <div>
-
-    <!--Stats cards-->
-    <!-- <div class="row">
-      <div class="col-md-6 col-xl-3" v-for="stats in statsCards" :key="stats.title">
-        <stats-card>
-          <div class="icon-big text-center" :class="`icon-${stats.type}`" slot="header">
-            <i :class="stats.icon"></i>
-          </div>
-          <div class="numbers" slot="content">
-            <p>{{stats.title}}</p>
-            {{stats.value}}
-          </div>
-          <div class="stats" slot="footer">
-            <i :class="stats.footerIcon"></i> {{stats.footerText}}
-          </div>
-        </stats-card>
-      </div>
-    </div> -->
-
-    <!--Charts-->
     <div class="row">
       <div class="col-md-6 col-12">
         <chart-card title="Response Statistics"
@@ -38,37 +17,13 @@
 
       <div class="col-md-6 col-12">
         <h5>Notification states</h5>
-          <div v-for="item in notificationList" :class="item.status == 'Unsafe'?'alert alert-danger':'alert alert-success' " :key="item.message">
-            <button type="button" aria-hidden="true" class="close">×</button>
+          <div v-for="(item,index) in notificationList" :class="item.status == 'Unsafe'?'alert alert-danger':'alert alert-success' " :key="index">
+            <button type="button" v-on:click="removeNotification(index)" aria-hidden="true" class="close">×</button>
             <span>
               <b> {{item.status}} </b> {{item.message}}</span>
           </div>
-           <!-- <div class="alert alert-success">
-            <button type="button" aria-hidden="true" class="close">×</button>
-            <span>
-              <b> Success - </b> This is a regular notification made with ".alert-success"</span>
-          </div> -->
-          <!-- <div class="alert alert-success">
-            <button type="button" aria-hidden="true" class="close">×</button>
-            <span>
-              <b> Success - </b> This is a regular notification made with ".alert-success"</span>
-          </div>
-          <div class="alert alert-warning">
-            <button type="button" aria-hidden="true" class="close">×</button>
-            <span>
-              <b> Warning - </b> This is a regular notification made with ".alert-warning"</span>
-          </div>
-          <div class="alert alert-danger">
-            <button type="button" aria-hidden="true" class="close">×</button>
-            <span>
-              <b> Danger - </b> This is a regular notification made with ".alert-danger"</span>
-          </div> -->
         </div>
       </div>
-
-    </div>
-
-  </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
@@ -206,12 +161,20 @@ export default {
       var setint = setInterval(() => {
         this.notificationList.push(responseData[counter++]);
 
-        if(counter == responseData.length || counter == 10){
-          clearInterval(setint);
+        if(counter == responseData.length ){
+           clearInterval(setint);
         }
-        // console.log(JSON.stringify(this.notificationList));
-}, 2000);
 
+        else if(counter > 6 && this.notificationList.length > 6){
+          // counter = 0;
+           this.notificationList.splice(0,1); 
+        }
+        }, 2000);
+
+    },
+
+    removeNotification(index){
+      this.notificationList.splice(index,1);
     }
   }
 };
