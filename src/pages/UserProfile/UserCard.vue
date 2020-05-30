@@ -1,5 +1,5 @@
 <template>
-  <!-- <card class="card-user" test123> -->
+  <!-- <card class="card-user"> -->
     <div class="main">
     <div class="container">
       <div class="box">
@@ -65,9 +65,13 @@
 </template>
 <script>
 import what3words from "../../middleware/what3words.js";
+import service from "@/middleware/service";
+
 export default {
    mounted() {
     // this.get3WordsData();
+    this.getAllUnsafeEmployee();
+
     var bwidth = 972;
     var bheight = 600;
     this.n_Tiles = this.defaults.x * this.defaults.y;
@@ -152,6 +156,18 @@ export default {
         );
       }
     },
+
+    async getAllUnsafeEmployee() {
+      const response = await service.getEndpoint(
+        `api/Message/GetUnsafeEmployee`
+      );
+      const responseData = response.data[0].addressCoordinates;
+      console.log("res----------", response.data);
+      
+      // this.marker = L.latLng(responseData.latitude, responseData.longitude);
+      // this.center = L.latLng(responseData.latitude, responseData.longitude);
+    }
+
   }
 };
 </script>
