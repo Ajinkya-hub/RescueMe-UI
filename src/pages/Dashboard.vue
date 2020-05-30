@@ -43,11 +43,11 @@
             <span>
               <b> {{item.status}} </b> {{item.message}}</span>
           </div>
-           <div class="alert alert-success">
+           <!-- <div class="alert alert-success">
             <button type="button" aria-hidden="true" class="close">×</button>
             <span>
               <b> Success - </b> This is a regular notification made with ".alert-success"</span>
-          </div>
+          </div> -->
           <!-- <div class="alert alert-success">
             <button type="button" aria-hidden="true" class="close">×</button>
             <span>
