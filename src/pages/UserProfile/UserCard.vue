@@ -15,17 +15,17 @@
               alt="..."
             />
             <h4 class="title">
-              Employee 1
+               {{userProfile.name}}
               <br />
               <a href="#">
-                <small>P10456342</small>
+                <small>{{userProfile.pid}}</small>
               </a>
             </h4>
           </div>
           <p class="description text-center">
-            Pune
+            {{userProfile.postTown}}
             <br />
-           422605
+           {{userProfile.postcode}}
           </p>
         </div>
         <hr />
@@ -113,8 +113,8 @@ export default {
       //else {
       //    cssPorps.blinkClass = "blink_me_green";
       //}
-debugger
-console.log("------------------------>>RR" + cssPorps);
+
+//console.log("------------------------>>RR" + cssPorps);
       this.division.push(cssPorps);
     }
    var ranNums = [];
@@ -135,12 +135,12 @@ while (i-- && ranNums.length < 5) {
 // console.log("------------------------>>RR" + ranNums);
 
 
-
-    // setTimeout(function() { this.getAllUnsafeEmployee(); }, 10000);
+   this.getAllUnsafeEmployee();
   },
   
   data() {
     return {
+      userProfile: [],
       details: [
         {
           title: "12",
@@ -208,6 +208,8 @@ while (i-- && ranNums.length < 5) {
         `api/Message/GetUnsafeEmployee`
       );
       const responseData = response.data[0].addressCoordinates;
+       this.userProfile = response.data[0];
+       debugger
       console.log("res----------", response.data);
 
 
