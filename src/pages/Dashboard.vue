@@ -8,7 +8,7 @@
         chart-type="Pie"
       >
         <span slot="footer">
-          <i class="ti-timer"></i> Campaign set 2 days ago
+          <i class="ti-timer"></i> Campaign set 2 hrs ago
         </span>
         <div slot="legend">
           <i class="fa fa-circle text-info"></i> Safe
