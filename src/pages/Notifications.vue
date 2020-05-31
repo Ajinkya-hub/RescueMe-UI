@@ -1,9 +1,8 @@
 <template>
-  <card title="Notifications" sub-title="Custom Vue notifications plugin">
+  <card title="Notifications">
     <div>
       <div class="row">
         <div class="col-md-6">
-          <h5>Notification states</h5>
           <div class="alert alert-danger">
             <button type="button" aria-hidden="true" class="close">×</button>
             <span>
