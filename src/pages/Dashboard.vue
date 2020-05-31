@@ -1,34 +1,48 @@
 <template>
-    <div class="row">
-      <div class="col-md-6 col-12">
-        <chart-card title="Response Statistics"
-                    sub-title="Last campaign performance"
-                    :chart-data="preferencesChart.data"
-                    chart-type="Pie">
-          <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span>
-          <div slot="legend">
-            <i class="fa fa-circle text-info"></i> Safe
-            <i class="fa fa-circle text-danger"></i> Unsafe
-            <i class="fa fa-circle text-warning"></i> Inside
-          </div>
-        </chart-card>
-      </div>
-
-      <div class="col-md-6 col-12">
-        <h5>Notification states</h5>
-          <div v-for="(item,index) in notificationList" :class="item.status == 'Unsafe'?'alert alert-danger':'alert alert-success' " :key="index">
-            <button type="button" v-on:click="removeNotification(index)" aria-hidden="true" class="close">×</button>
-            <span>
-              <b> {{item.status}} </b> {{item.message}}</span>
-          </div>
+  <div class="row">
+    <div class="col-md-6 col-12">
+      <chart-card
+        title="Response Statistics"
+        sub-title="Last campaign performance"
+        :chart-data="preferencesChart.data"
+        chart-type="Pie"
+      >
+        <span slot="footer">
+          <i class="ti-timer"></i> Campaign set 2 days ago
+        </span>
+        <div slot="legend">
+          <i class="fa fa-circle text-info"></i> Safe
+          <i class="fa fa-circle text-danger"></i> Unsafe
+          <!-- <i class="fa fa-circle text-warning"></i> Inside -->
         </div>
+      </chart-card>
+    </div>
+
+    <div class="col-md-6 col-12">
+      <h5>Notification states</h5>
+      <div
+        v-for="(item,index) in notificationList"
+        :class="item.status == 'Unsafe'?'alert alert-danger':'alert alert-success' "
+        :key="index"
+      >
+        <button
+          type="button"
+          v-on:click="removeNotification(index)"
+          aria-hidden="true"
+          class="close"
+        >×</button>
+        <span>
+          <b>{{item.status}}</b>
+          {{item.message}}
+        </span>
       </div>
+    </div>
+  </div>
 </template>
 <script>
 import { StatsCard, ChartCard } from "@/components/index";
-import service from '@/middleware/service';
-import Chartist from 'chartist';
+import service from "@/middleware/service";
+import Chartist from "chartist";
 export default {
   components: {
     StatsCard,
@@ -137,44 +151,57 @@ export default {
       },
       preferencesChart: {
         data: {
-          labels: ["62%", "32%", "6%"],
-          series: [62, 32, 6]
+          labels: ["62%", "32%"],
+          series: [62, 32]
         },
         options: {}
       },
-      notificationList : []
+      notificationList: []
     };
   },
-  mounted(){
+  mounted() {
     this.getNotifications();
   },
-  methods:{
-    async getNotifications(){
-      const response = await service.getEndpoint(
-        `api/Message/GetNotification`
-        );
-        const responseData = response.data;
+  methods: {
+    async getNotifications() {
+      const response = await service.getEndpoint(`api/Message/GetNotification`);
+      const responseData = response.data;
 
-        console.log(responseData);
+      console.log(responseData);
 
-        let counter = 0;
+      let counter = 0;
+      let safeCounter = 0;
+      let UnsafeCounter = 0;
       var setint = setInterval(() => {
-        this.notificationList.push(responseData[counter++]);
-
-        if(counter == responseData.length ){
-           clearInterval(setint);
+        var incrmtData = responseData[counter++];
+        this.notificationList.push(incrmtData);
+// debugger;
+        if (incrmtData.status == "Safe") {
+          safeCounter++;
+        }
+        if (incrmtData.status == "Unsafe") {
+          UnsafeCounter++;
         }
 
-        else if(counter > 6 && this.notificationList.length > 6){
+        // this.preferencesChart.data.labels[1] = responseData.length - counter + "%";
+        this.preferencesChart.data.labels[0] = safeCounter + "%";
+        this.preferencesChart.data.labels[1] = UnsafeCounter + "%";
+
+        // this.preferencesChart.data.series[0] = responseData.length - counter;
+        this.preferencesChart.data.series[0] = safeCounter;
+        this.preferencesChart.data.series[1] = UnsafeCounter;
+
+        if (counter == responseData.length) {
+          clearInterval(setint);
+        } else if (counter > 6 && this.notificationList.length > 6) {
           // counter = 0;
-           this.notificationList.splice(0,1); 
+          this.notificationList.splice(0, 1);
         }
-        }, 2000);
-
+      }, 2000);
     },
 
-    removeNotification(index){
-      this.notificationList.splice(index,1);
+    removeNotification(index) {
+      this.notificationList.splice(index, 1);
     }
   }
 };

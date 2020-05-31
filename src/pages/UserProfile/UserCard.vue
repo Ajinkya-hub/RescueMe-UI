@@ -69,9 +69,6 @@ import service from "@/middleware/service";
 
 export default {
    mounted() {
-    // this.get3WordsData();
-    this.getAllUnsafeEmployee();
-
     var bwidth = 972;
     var bheight = 600;
     this.n_Tiles = this.defaults.x * this.defaults.y;
@@ -86,19 +83,40 @@ export default {
         //backgroundImage: "url(http://1.bp.blogspot.com/-8PfnHfgrH4I/TylX2v8pTMI/AAAAAAAAJJ4/TICBoSEI57o/s1600/search_by_image_image.png)"
       };
 
-      if (i == 412 || i == 413 || i == 452 || i == 453) {
-        cssPorps.blinkClass = "blink_me_orange";
-      }
 
-      if (i == 551) {
-        cssPorps.blinkClass = "blink_me_orange";
-      }
+      // if (i == 412 || i == 413 || i == 452 || i == 453) {
+      //   cssPorps.blinkClass = "blink_me_orange";
+      // }
+
+      // if (i == 551) {
+      //   cssPorps.blinkClass = "blink_me_orange";
+      // }
       //else {
       //    cssPorps.blinkClass = "blink_me_green";
       //}
 
       this.division.push(cssPorps);
     }
+   var ranNums = [];
+    var i = this.n_Tiles;
+    var j = 0;
+
+while (i-- && ranNums.length < 5) {
+    j = Math.floor(Math.random() * (i+1));
+    ranNums.push(j);
+   
+
+    ranNums.forEach(element => {
+      this.division[element].blinkClass = "blink_me_orange";
+    });
+
+}
+
+console.log("------------------------>>RR" + ranNums);
+
+
+
+    // setTimeout(function() { this.getAllUnsafeEmployee(); }, 10000);
   },
   
   data() {
@@ -125,6 +143,14 @@ export default {
       n_Tiles: 0,
       division: [],
       words: "",
+      wordsArray : [
+        "rationed.weedy.partied",
+        "investors.gazette.kidney",
+        "rephrase.grandest.fortified",
+        "parsnip.lookout.trek",
+        "manual.both.besotted",
+
+      ]
     };
   },
   methods: {
@@ -163,6 +189,8 @@ export default {
       );
       const responseData = response.data[0].addressCoordinates;
       console.log("res----------", response.data);
+
+
       
       // this.marker = L.latLng(responseData.latitude, responseData.longitude);
       // this.center = L.latLng(responseData.latitude, responseData.longitude);
