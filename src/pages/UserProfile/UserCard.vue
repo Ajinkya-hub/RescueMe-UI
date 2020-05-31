@@ -11,11 +11,12 @@
           <div class="author">
             <img
               class="avatar border-white"
-              src="@/assets/img/faces/face-1.jpg"
+              :src="userProfile.userPhoto"
               alt="..."
             />
             <h4 class="title">
                {{userProfile.name}}
+               <!-- {{userProfile.name}} -->
               <br />
               <a href="#">
                 <small>{{userProfile.postTown}}</small>
@@ -213,7 +214,8 @@ while (i-- && ranNums.length < 5) {
       // debugger;
       this.division[element].blinkClass = "blink_me_orange";
       this.division[element].empID = this.unsafeEmployees[index].pid;
-      this.unsafeEmployees[index].userProfile = "@/assets/img/faces/face-"+index+ ".jpg";
+      this.unsafeEmployees[index].userPhoto = require("@/assets/img/faces/face-"+index+ ".jpg");
+      
     });
       
       // this.marker = L.latLng(responseData.latitude, responseData.longitude);
