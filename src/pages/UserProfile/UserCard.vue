@@ -44,6 +44,7 @@
                     <div class="box stack-top">
                           <div
                             class="tile"
+                            v-on:click="ShowEmployeeData(item)"
                             v-for="item in division"
                             :id="item.id"
                             :class="item.blinkClass"
@@ -88,6 +89,7 @@ import service from "@/middleware/service";
 
 export default {
    mounted() {
+    
     var bwidth = 580;
     var bheight = 390;
     this.n_Tiles = this.defaults.x * this.defaults.y;
@@ -117,30 +119,16 @@ export default {
 //console.log("------------------------>>RR" + cssPorps);
       this.division.push(cssPorps);
     }
-   var ranNums = [];
-    var i = this.n_Tiles;
-    var j = 0;
+   // console.log("------------------------>>RR" + ranNums);
 
-while (i-- && ranNums.length < 5) {
-    j = Math.floor(Math.random() * (i+1));
-    ranNums.push(j);
+ this.getAllUnsafeEmployee();
    
-
-    ranNums.forEach(element => {
-      this.division[element].blinkClass = "blink_me_orange";
-    });
-
-}
-
-// console.log("------------------------>>RR" + ranNums);
-
-
-   this.getAllUnsafeEmployee();
   },
   
   data() {
     return {
       userProfile: [],
+      unsafeEmployees : [],
       details: [
         {
           title: "12",
@@ -208,14 +196,34 @@ while (i-- && ranNums.length < 5) {
         `api/Message/GetUnsafeEmployee`
       );
       const responseData = response.data[0].addressCoordinates;
+      this.unsafeEmployees = response.data;
        this.userProfile = response.data[0];
-       debugger
-      console.log("res----------", response.data);
+      //  debugger
+      console.log("res----------", this.unsafeEmployees);
 
+var ranNums = [];
+    var i = this.n_Tiles;
+    var j = 0;
 
+while (i-- && ranNums.length < 5) {
+    j = Math.floor(Math.random() * (i+1));
+    ranNums.push(j);
+}
+    ranNums.forEach((element,index) => {
+      // debugger;
+      this.division[element].blinkClass = "blink_me_orange";
+      this.division[element].empID = this.unsafeEmployees[index].pid;
+      this.unsafeEmployees[index].userProfile = "@/assets/img/faces/face-"+index+ ".jpg";
+    });
       
       // this.marker = L.latLng(responseData.latitude, responseData.longitude);
       // this.center = L.latLng(responseData.latitude, responseData.longitude);
+    },
+
+    ShowEmployeeData(item){
+      console.log("asdsadad",item);
+this.userProfile  = this.unsafeEmployees.find(x=>x.pid == item.empID);
+  
     }
 
   }

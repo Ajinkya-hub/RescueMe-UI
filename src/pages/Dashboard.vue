@@ -106,22 +106,31 @@ export default {
     async getNotifications() {
       const response = await service.getEndpoint(`api/Message/GetNotification`);
       const responseData = response.data;
-
+      let totalCount = responseData.length;
       let counter = 0;
       let safeCounter = 0;
       let UnsafeCounter = 0;
+      let safePercent = 0;
+      let unsafePercent = 0;
       var setint = setInterval(() => {
         var incrmtData = responseData[counter++];
         this.notificationList.push(incrmtData);
         // debugger;
         if (incrmtData.status == "Safe") {
           safeCounter++;
+          safePercent = (safeCounter * 100/totalCount).toFixed(0);
+
         }
         if (incrmtData.status == "Unsafe") {
           UnsafeCounter++;
+          unsafePercent = (UnsafeCounter * 100/totalCount).toFixed(0);
         }
-        this.seriesData[0] = { x: "Safe", y: safeCounter, fill: "#498fff", text: safeCounter + '%' };
-        this.seriesData[1] = { x: "Unsafe", y: UnsafeCounter, fill: "#ffa060", text: UnsafeCounter + '%'};
+        let insideCount = totalCount-(safeCounter + UnsafeCounter);
+        let insidePercent = (totalCount-(safeCounter + UnsafeCounter) * 100 / totalCount).toFixed(0);
+
+        this.seriesData[0] = { x: "Safe", y: safeCounter, fill: "#498fff", text: safePercent + '%' };
+        this.seriesData[1] = { x: "Unsafe", y: UnsafeCounter, fill: "#ffa060", text: unsafePercent + '%'};
+        // this.seriesData[2] = { x: "Inside", y: insideCount, fill: "#ffa061", text: insidePercent + '%'};
 
         if (counter == responseData.length) {
           clearInterval(setint);
