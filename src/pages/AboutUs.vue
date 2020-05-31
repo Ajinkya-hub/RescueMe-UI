@@ -1,5 +1,5 @@
 <template>
-  <card title="Notifications" sub-title="Custom Vue notifications plugin">
+  <card title="About Us" sub-title="Itroduction Video">
     <div>
       <div class="row">
         <div class="col-md-6">
