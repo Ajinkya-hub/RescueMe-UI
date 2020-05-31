@@ -88,8 +88,8 @@ import service from "@/middleware/service";
 
 export default {
    mounted() {
-    var bwidth = 972;
-    var bheight = 600;
+    var bwidth = 580;
+    var bheight = 390;
     this.n_Tiles = this.defaults.x * this.defaults.y;
     for (var i = 0; i < this.n_Tiles; i++) {
       var cssPorps = {
@@ -113,7 +113,8 @@ export default {
       //else {
       //    cssPorps.blinkClass = "blink_me_green";
       //}
-
+debugger
+console.log("------------------------>>RR" + cssPorps);
       this.division.push(cssPorps);
     }
    var ranNums = [];
@@ -131,7 +132,7 @@ while (i-- && ranNums.length < 5) {
 
 }
 
-console.log("------------------------>>RR" + ranNums);
+// console.log("------------------------>>RR" + ranNums);
 
 
 
@@ -155,8 +156,8 @@ console.log("------------------------>>RR" + ranNums);
         }
       ],
       defaults: {
-        x: 40, // tiles in x axis
-        y: 30, // tiles in y axis
+        x: 27, // tiles in x axis
+        y: 20, // tiles in y axis
         gap: 1,
       },
       n_Tiles: 0,
@@ -281,9 +282,12 @@ console.log("------------------------>>RR" + ranNums);
 }
 
 .stack-top {
-  z-index: 9;
-  width: 100%;
-  height: 100%;
+    z-index: 9;
+    width: 580px;
+    height: 490px;
+    margin-left: 100px;
+    margin-top: 35px;
+
   /*margin: 40px;*/ /* for demo purpose  */
 }
 
