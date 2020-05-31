@@ -18,14 +18,14 @@
                {{userProfile.name}}
               <br />
               <a href="#">
-                <small>{{userProfile.pid}}</small>
+                <small>{{userProfile.postTown}}</small>
               </a>
             </h4>
           </div>
           <p class="description text-center">
-            {{userProfile.postTown}}
+            {{userProfile.pid}}
             <br />
-           {{userProfile.postcode}}
+           {{userProfile.phoneNumber}}
           </p>
         </div>
         <hr />
@@ -252,7 +252,7 @@ this.userProfile  = this.unsafeEmployees.find(x=>x.pid == item.empID);
 
 .blink_me_orange {
   animation: blinker 1s linear infinite;
-  background-color: lightsalmon;
+  background-color: darkorange;
   border-radius: 60%;
   display: inline-block;
 }
