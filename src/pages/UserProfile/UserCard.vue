@@ -1,67 +1,86 @@
 <template>
-  <!-- <card class="card-user"> -->
-    <div class="main">
-    <div class="container">
-      <div class="box">
-        <img ref="drawTable" class="center-fit" src="@/assets/img/FloorPlan.jpg" />
-      </div>
-      <div class="box stack-top">
-        <div
-          class="tile"
-          v-for="item in division"
-          :id="item.id"
-          :class="item.blinkClass"
-          :ref="item.id"
-          :style="{
-            'background-position-x': item.background_position_x,
-            'background-position-y': item.background_position_y,
-            'background-image': item.backgroundImage,
-            background: item.background,
-            'margin-bottom': item.marginBottom,
-            'margin-right': item.marginRight,
-            'background-color': item.backgroundcolor,
-            width: item.width,
-            height: item.height,
-          }"
-          :key="item.id"
-        ></div>
-      </div>
+
+ <div class="row">
+
+<div class="col-xl-4 col-lg-5 col-md-6">
+      <card class="card-user">
+        <div slot="image">
+          <img src="@/assets/img/background.jpg" alt="..." />
+        </div>
+        <div>
+          <div class="author">
+            <img
+              class="avatar border-white"
+              src="@/assets/img/faces/face-1.jpg"
+              alt="..."
+            />
+            <h4 class="title">
+              Employee 1
+              <br />
+              <a href="#">
+                <small>P10456342</small>
+              </a>
+            </h4>
+          </div>
+          <p class="description text-center">
+            Pune
+            <br />
+           422605
+          </p>
+        </div>
+        <hr />
+      </card>
     </div>
+
+ <div class="col-xl-8 col-lg-7 col-md-6">
+      <card class="card-map">
+          <div class="main">
+            <div class="container">
+              <div class="box">
+                  <div class="container">
+                    <div class="box">
+                      <img ref="drawTable" class="center-fit" src="@/assets/img/FloorPlan.jpg" />
+                    </div>
+                    <div class="box stack-top">
+                          <div
+                            class="tile"
+                            v-for="item in division"
+                            :id="item.id"
+                            :class="item.blinkClass"
+                            :ref="item.id"
+                            :style="{
+                              'background-position-x': item.background_position_x,
+                              'background-position-y': item.background_position_y,
+                              'background-image': item.backgroundImage,
+                              background: item.background,
+                              'margin-bottom': item.marginBottom,
+                              'margin-right': item.marginRight,
+                              'background-color': item.backgroundcolor,
+                              width: item.width,
+                              height: item.height,
+                            }"
+                            :key="item.id"
+                          ></div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+      </card>
+      </div>
+  </div>
+
+
+
+
+  <!-- <card class="card-user"> -->
+  <!--   <div class="main">
+  
     <div class="map-div">
       <img src="@/assets/img/world-map.png" alt class="map-img" />
     </div>
-  </div>
-    <!-- <div slot="image">
-      <img src="@/assets/img/background.jpg" alt="...">
-    </div>
-    <div>
-      <div class="author">
-        <img class="avatar border-white" src="@/assets/img/faces/face-2.jpg" alt="...">
-        <h4 class="title">Chet Faker
-          <br>
-          <a href="#">
-            <small>@chetfaker</small>
-          </a>
-        </h4>
-      </div>
-      <p class="description text-center">
-        "I like the way you work it
-        <br> No diggity
-        <br> I wanna bag it up"
-      </p>
-    </div>
-    <hr>
-    <div class="text-center">
-      <div class="row">
-        <div v-for="(info, index) in details" :key="index" :class="getClasses(index)">
-          <h5>{{info.title}}
-            <br>
-            <small>{{info.subTitle}}</small>
-          </h5>
-        </div>
-      </div>
-    </div> -->
-  <!-- </card> -->
+  </div> -->
+  
 </template>
 <script>
 import what3words from "../../middleware/what3words.js";
