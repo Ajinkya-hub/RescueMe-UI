@@ -15,17 +15,17 @@
               alt="..."
             />
             <h4 class="title">
-              Employee 1
+               {{userProfile.name}}
               <br />
               <a href="#">
-                <small>P10456342</small>
+                <small>{{userProfile.pid}}</small>
               </a>
             </h4>
           </div>
           <p class="description text-center">
-            Pune
+            {{userProfile.postTown}}
             <br />
-           422605
+           {{userProfile.postcode}}
           </p>
         </div>
         <hr />
@@ -88,8 +88,8 @@ import service from "@/middleware/service";
 
 export default {
    mounted() {
-    var bwidth = 972;
-    var bheight = 600;
+    var bwidth = 580;
+    var bheight = 390;
     this.n_Tiles = this.defaults.x * this.defaults.y;
     for (var i = 0; i < this.n_Tiles; i++) {
       var cssPorps = {
@@ -114,6 +114,7 @@ export default {
       //    cssPorps.blinkClass = "blink_me_green";
       //}
 
+//console.log("------------------------>>RR" + cssPorps);
       this.division.push(cssPorps);
     }
    var ranNums = [];
@@ -131,15 +132,15 @@ while (i-- && ranNums.length < 5) {
 
 }
 
-console.log("------------------------>>RR" + ranNums);
+// console.log("------------------------>>RR" + ranNums);
 
 
-
-    // setTimeout(function() { this.getAllUnsafeEmployee(); }, 10000);
+   this.getAllUnsafeEmployee();
   },
   
   data() {
     return {
+      userProfile: [],
       details: [
         {
           title: "12",
@@ -155,8 +156,8 @@ console.log("------------------------>>RR" + ranNums);
         }
       ],
       defaults: {
-        x: 40, // tiles in x axis
-        y: 30, // tiles in y axis
+        x: 27, // tiles in x axis
+        y: 20, // tiles in y axis
         gap: 1,
       },
       n_Tiles: 0,
@@ -207,6 +208,8 @@ console.log("------------------------>>RR" + ranNums);
         `api/Message/GetUnsafeEmployee`
       );
       const responseData = response.data[0].addressCoordinates;
+       this.userProfile = response.data[0];
+       debugger
       console.log("res----------", response.data);
 
 
@@ -281,9 +284,12 @@ console.log("------------------------>>RR" + ranNums);
 }
 
 .stack-top {
-  z-index: 9;
-  width: 100%;
-  height: 100%;
+    z-index: 9;
+    width: 580px;
+    height: 490px;
+    margin-left: 100px;
+    margin-top: 35px;
+
   /*margin: 40px;*/ /* for demo purpose  */
 }
 
