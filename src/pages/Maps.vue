@@ -27,6 +27,7 @@
           </p>
         </div>
         <hr />
+        <button type="button" class="btn btn-default button">Inform CAPITA Employees</button>
         <!-- <div class="text-center">
           <div class="row">
             <div
@@ -167,5 +168,9 @@ export default {
 .map-img {
   height: 135px;
   margin-top: 0;
+}
+
+.button {
+  margin-left: 75px;
 }
 </style>
